@@ -2,17 +2,17 @@
 
 ## Usage
 
-1. Download `generate_nginx_conf.sh` to server workspace.
+1. Download `generate_service.sh` to server workspace.
 
     > `cd <DESIRE WORKSPACE>`
 
-    > `wget https://raw.githubusercontent.com/ahchienong/nginx-conf-generator/master/generate_nginx_conf.sh`
+    > `wget https://raw.githubusercontent.com/ahchienong/service-script-generator/main/generate_service.sh`
 
 2. Download `template.sh` to server workspace.
 
     > `cd <DESIRE WORKSPACE>`
 
-    > `wget https://raw.githubusercontent.com/ahchienong/nginx-conf-generator/master/template.conf-template`
+    > `wget https://raw.githubusercontent.com/ahchienong/service-script-generator/main/template.sh`
 
     2.1 Run command to generate service scripts
 
