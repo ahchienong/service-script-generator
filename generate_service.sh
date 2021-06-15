@@ -26,10 +26,12 @@ if [ "$#" -eq "4" ]; then
                 cp -v ./template.sh $PATHTOJAR/$YOURSERVICENAME.sh
                 echo "(2/5) Proceed with replacing YOURSERVICENAME with $YOURSERVICENAME"
                 sed -i -e 's/YOURSERVICENAME/'$YOURSERVICENAME'/g' $PATHTOJAR/$YOURSERVICENAME.sh
+                sed -i -e 's/YOURSERVICENAME/'$YOURSERVICENAME'/g' $PATHTOJAR/$utilities.sh
                 echo "(3/5) Proceed with replacing SERVICEPORT with $SERVICEPORT"
                 sed -i -e 's/SERVICEPORT/'$SERVICEPORT'/g' $PATHTOJAR/$YOURSERVICENAME.sh
                 echo "(4/5) Proceed with replacing PATHTOJAR with $PATHTOJAR"
                 sed -i -e 's/PATHTOJAR/'$PATHTOJAR'/g' $PATHTOJAR/$YOURSERVICENAME.sh
+                sed -i -e 's/PATHTOJAR/'$PATHTOJAR'/g' $PATHTOJAR/utilities.sh
                 echo "(5/5) Proceed with replacing JARFILE with $JARFILE"
                 sed -i -e 's/JARFILE/'$JARFILE'/g' $PATHTOJAR/$YOURSERVICENAME.sh
 
