@@ -26,7 +26,11 @@ else
 case $1 in
        update-jar)
         if [ "$#" -eq "1" ]; then
+                echo "----------------------------------------------"
                 echo "insufficient info for this option"
+                echo "usage: $0 update-jar <artifacts-name.jar>"
+                echo "##############################################"
+                exit 2
         fi
         NEW_JAR=$2
         if [ -f ${current_dir}/${service_script} ]; then
@@ -36,7 +40,11 @@ case $1 in
                 echo $cmd
                 $cmd
         else
+            echo "----------------------------------------------"
             echo "$service_name script not found - $service_script"
+            echo "check in path $current_dir for $service_script"
+            echo "##############################################"
+            exit 2
         fi
         ;;
        update-latest-jar)
@@ -48,8 +56,12 @@ case $1 in
                 cmd=`sed -i "0,/latest_jar/s/.*latest_jar.*/latest_jar=\"${NEW_JAR}\"/" $service_script`
                 echo $cmd
                 $cmd
-        else
+        else                
+                echo "----------------------------------------------"
                 echo "$service_name $service_script or latest_jar.list not found"
+                echo "try execute ./download-packages.sh to obtain latest_jar first"
+                echo "##############################################"
+                exit 2
         fi
         ;;
 esac
