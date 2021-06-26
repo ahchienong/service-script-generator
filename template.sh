@@ -94,5 +94,5 @@ else
                 fi
             ;;
         esac
-
+exit 0
 fi
