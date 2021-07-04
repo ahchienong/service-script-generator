@@ -37,11 +37,15 @@ else
                     PID=$(cat ${current_dir}/${service_pid});
                     if ps aux | grep $PID | grep ${service_name} >/dev/null; then
                         echo "$service_name service started (PID: $PID )"
+                        exit 0;
                     else
-                        echo "$service_name service not started"
+                        rm ${current_dir}/${service_pid}
+                        echo "$service_name service dead"
+                        exit 1;
                     fi
                 else
                     echo "$service_name service not started"
+                    exit 2;
                 fi
                 ;;
             start)
@@ -50,8 +54,10 @@ else
                     nohup java -jar ${jar_vars} ${service_spring_profile} ${service_port} ${current_dir}/${latest_jar} > /dev/null &
                     echo $! > ${current_dir}/${service_pid}
                     echo "$service_name service started"
+                    exit 0;
                 else
                     echo "$service_name service already running"
+                    exit 0;
                 fi
             ;;
             logs)
@@ -60,10 +66,13 @@ else
                     if ps aux | grep $PID | grep ${service_name} >/dev/null; then
                         tail -200f ${current_dir}/logs/${service_name}-service.log
                     else
-                        echo "$service_name service not started"
+                        rm ${current_dir}/${service_pid}
+                        echo "$service_name service dead"
+                        exit 1;
                     fi
                 else
                     echo "$service_name service not started"
+                    exit 2;
                 fi
             ;;
             stop)
@@ -73,8 +82,10 @@ else
                     kill $PID;
                     echo "$service_pid service stopped"
                     rm ${current_dir}/${service_pid}
+                    exit 0;
                 else
                     echo "$service_name service is not running"
+                    exit 0;
                 fi
             ;;
             restart)
@@ -89,8 +100,13 @@ else
                     nohup java -jar ${jar_vars} ${service_spring_profile} ${service_port} ${current_dir}/${latest_jar} > /dev/null &
                     echo $! > ${current_dir}/${service_pid}
                     echo "$service_name service started"
+                    exit 0;
                 else
                     echo "$service_name service is not running"
+                    nohup java -jar ${jar_vars} ${service_spring_profile} ${service_port} ${current_dir}/${latest_jar} > /dev/null &
+                    echo $! > ${current_dir}/${service_pid}
+                    echo "$service_name service started"
+                    exit 0;
                 fi
             ;;
         esac
